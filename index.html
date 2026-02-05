@@ -4,86 +4,410 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>CELEB-LUXE-LIFE — Celebrity & Luxury Lifestyle</title>
-  <meta name="description" content="Celebrity & luxury lifestyle videos: Kardashians lifestyle, celebrity biography, net worth, houses, cars and trends. Watch the latest videos and subscribe." />
+  <title>CELEB-LUXE-LIFE — Celebrity & Luxury Lifestyle Videos</title>
+  <meta name="description" content="Celebrity stories & luxury lifestyle videos: Kardashians, biographies, net worth, mansions, cars, fashion and trends. Watch the latest videos and subscribe." />
+  <link rel="canonical" href="https://celebluxelife.github.io/" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <!-- Social preview -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="CELEB-LUXE-LIFE — Celebrity & Luxury Lifestyle Videos" />
+  <meta property="og:description" content="Celebrity stories & luxury lifestyle videos: Kardashians, biographies, net worth, mansions, cars, fashion and trends." />
+  <meta property="og:url" content="https://celebluxelife.github.io/" />
+  <meta property="og:image" content="https://i.ytimg.com/vi/nCKJjopUsfs/hqdefault.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CELEB-LUXE-LIFE — Celebrity & Luxury Lifestyle Videos" />
+  <meta name="twitter:description" content="Celebrity stories & luxury lifestyle videos: Kardashians, biographies, net worth, mansions, cars, fashion and trends." />
+  <meta name="twitter:image" content="https://i.ytimg.com/vi/nCKJjopUsfs/hqdefault.jpg" />
+
+  <style>
+    :root{
+      --bg:#0b0f19;
+      --card:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.70);
+      --shadow:0 18px 55px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1140px;
+      --accent:#ff2d2d;
+      --accent2:#ffb703;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:
+        radial-gradient(1200px 800px at 20% 0%, rgba(255,45,45,.18), transparent 60%),
+        radial-gradient(1200px 800px at 80% 10%, rgba(255,183,3,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      position:sticky; top:12px; z-index:10;
+      backdrop-filter: blur(10px);
+    }
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+    .logo{
+      width:34px; height:34px; border-radius:12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 12px 30px rgba(255,45,45,.18);
+    }
+    .brand b{font-size:14px; letter-spacing:.2px}
+    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .nav a{
+      text-decoration:none; color:var(--muted);
+      font-size:14px; padding:8px 12px;
+      border-radius:999px; border:1px solid transparent;
+    }
+    .nav a:hover{border-color:var(--border); background:rgba(255,255,255,.04); color:var(--text)}
+    .hero{
+      margin-top:18px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .hero-inner{
+      display:grid; grid-template-columns: 1.2fr .8fr;
+      gap:16px; padding:20px;
+    }
+    @media (max-width: 920px){ .hero-inner{grid-template-columns:1fr} .topbar{position:relative; top:0} }
+    h1{margin:0 0 10px; font-size:clamp(28px, 4vw, 46px); line-height:1.05}
+    p{margin:0 0 12px; color:var(--muted)}
+    .pillrow{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .pill{
+      font-size:13px; color:rgba(255,255,255,.78);
+      padding:7px 10px; border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+    }
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:11px 14px; border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      text-decoration:none; font-weight:800;
+    }
+    .btn.primary{
+      border-color:transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color:#111;
+    }
+    .card{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      margin-top:16px;
+    }
+    .grid{
+      display:grid; grid-template-columns: repeat(3, 1fr);
+      gap:14px; margin-top:12px;
+    }
+    @media (max-width: 980px){ .grid{grid-template-columns: repeat(2, 1fr)} }
+    @media (max-width: 620px){ .grid{grid-template-columns: 1fr} }
+    .vcard{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      border-radius:16px;
+      overflow:hidden;
+      text-decoration:none;
+      display:block;
+    }
+    .thumb{width:100%; aspect-ratio:16/9; display:block; background:#000}
+    .vmeta{padding:12px}
+    .vtitle{margin:0 0 6px; font-size:14px; color:var(--text); font-weight:800}
+    .vsub{margin:0; font-size:12px; color:rgba(255,255,255,.62)}
+    .player{
+      border:1px solid var(--border);
+      border-radius:16px;
+      overflow:hidden;
+      background:#000;
+      margin-top:10px;
+    }
+    .player iframe{width:100%; aspect-ratio:16/9; border:0; display:block}
+    .hr{height:1px; background:var(--border); margin:14px 0}
+    .footer{margin:18px 0 30px; text-align:center; color:rgba(255,255,255,.55); font-size:13px}
+    input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
+    }
+    .small{font-size:13px; color:rgba(255,255,255,.62)}
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"CELEB-LUXE-LIFE",
+    "url":"https://celebluxelife.github.io/"
+  }
+  </script>
 </head>
 
-<body style="font-family:Arial; max-width:900px; margin:30px auto; padding:10px; line-height:1.5;">
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Home">
+        <span class="logo" aria-hidden="true"></span>
+        <b>CELEB-LUXE-LIFE</b>
+      </a>
+      <nav class="nav" aria-label="Navigation">
+        <a href="#videos">Latest</a>
+        <a href="videos.html">All videos</a>
+        <a href="#subscribe">Subscribe</a>
+      </nav>
+    </header>
 
-  <h1>CELEB-LUXE-LIFE</h1>
+    <main id="top" class="hero">
+      <div class="hero-inner">
+        <section>
+          <h1>Celebrity stories & luxury lifestyle.</h1>
+          <p>
+            Biographies, net worth, mansions, luxury cars, fashion and trending celebrity topics —
+            presented in quick, bingeable videos.
+          </p>
 
-  <p>
-    <a href="https://www.youtube.com/@CELEB-LUXE-LIFE" target="_blank"
-       style="display:inline-block;padding:12px 16px;background:#ff0000;color:#fff;text-decoration:none;border-radius:10px;font-weight:bold;">
-      ✅ Subscribe on YouTube
-    </a>
-  </p>
+          <div class="pillrow">
+            <span class="pill">Kardashians</span>
+            <span class="pill">Biographies</span>
+            <span class="pill">Net Worth</span>
+            <span class="pill">Mansions & Cars</span>
+            <span class="pill">Luxury Lifestyle</span>
+          </div>
 
-  <p>
-    Welcome to <b>CELEB-LUXE-LIFE</b> — celebrity stories, lifestyle and luxury highlights.
-    Watch the latest videos below and subscribe for more.
-  </p>
+          <div class="btnrow" id="subscribe">
+            <a class="btn primary" href="https://www.youtube.com/@CELEB-LUXE-LIFE" target="_blank" rel="noopener">
+              ✅ Subscribe on YouTube
+            </a>
+            <a class="btn" href="videos.html">Browse all videos</a>
+          </div>
 
-  <hr>
+          <p class="small" style="margin-top:10px">
+            Pro tip: this site loads fast (videos only load when you click).
+          </p>
+        </section>
 
-  <h2>About CELEB-LUXE-LIFE</h2>
-  <p>
-    CELEB-LUXE-LIFE shares celebrity stories and luxury lifestyle content: Kardashian lifestyle, celebrity biographies,
-    net worth, houses, cars and trending topics. Watch the newest videos below and subscribe for more updates.
-  </p>
+        <aside class="card" style="margin:0">
+          <h2 style="margin:0 0 8px; font-size:18px;">Start here</h2>
+          <p class="small" style="margin-top:0">Most-viewed topic on the channel</p>
+          <div id="startHerePlayer" class="player"></div>
+          <div class="btnrow" style="margin-top:12px">
+            <a class="btn" href="https://www.youtube.com/@CELEB-LUXE-LIFE" target="_blank" rel="noopener">Channel</a>
+            <a class="btn" href="videos.html">All videos</a>
+          </div>
+        </aside>
+      </div>
+    </main>
 
-  <hr>
+    <section class="card">
+      <h2 style="margin:0 0 8px;">Search videos</h2>
+      <p class="small" style="margin-top:0">Type to filter instantly.</p>
+      <input id="q" type="text" placeholder="Search (e.g., Kardashians, net worth, mansion)..." />
+    </section>
 
-  <h2>Videos</h2>
+    <section id="videos" class="card">
+      <h2 style="margin:0 0 8px;">Latest videos</h2>
+      <p class="small" style="margin-top:0">Click a card to play. Titles load automatically.</p>
 
-  <h3>Featured video</h3>
-  <iframe width="100%" height="480"
-    src="https://www.youtube.com/embed/rxt-F1CguhI"
-    title="Featured video"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen></iframe>
+      <div id="grid" class="grid"></div>
 
-  <br><br>
+      <div class="hr"></div>
 
-  <h3>Video 2</h3>
-  <iframe width="100%" height="480"
-    src="https://www.youtube.com/embed/McfzGlemM_k"
-    title="Video 2"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen></iframe>
+      <div class="btnrow">
+        <a class="btn primary" href="videos.html">See ALL videos</a>
+        <a class="btn" href="https://www.youtube.com/@CELEB-LUXE-LIFE/videos" target="_blank" rel="noopener">All on YouTube</a>
+      </div>
+    </section>
 
-  <br><br>
-
-  <h3>Video 3</h3>
-  <iframe width="100%" height="480"
-    src="https://www.youtube.com/embed/d_m7eGE_Tas"
-    title="Video 3"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen></iframe>
-
-  <br><br>
-
-  <h3>Kardashians lifestyle &amp; luxury (most viewed)</h3>
-  <iframe width="100%" height="480"
-    src="https://www.youtube.com/embed/nCKJjopUsfs"
-    title="Kardashians lifestyle &amp; luxury"
-    frameborder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-    allowfullscreen></iframe>
-
-  <hr>
-
-  <p style="font-size:13px;color:#555;">
-    © <span id="year"></span> CELEB-LUXE-LIFE —
-    <a href="https://www.youtube.com/@CELEB-LUXE-LIFE" target="_blank">YouTube channel</a>
-  </p>
+    <p class="footer">
+      © <span id="year"></span> CELEB-LUXE-LIFE •
+      <a href="https://www.youtube.com/@CELEB-LUXE-LIFE" target="_blank" rel="noopener">YouTube</a>
+    </p>
+  </div>
 
   <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+    // ====== YOUR VIDEO LIST (includes earlier + all new, duplicates removed) ======
+    const ALL_VIDEO_IDS = [
+      // Earlier (already used on your site)
+      "nCKJjopUsfs",
+      "rxt-F1CguhI",
+      "McfzGlemM_k",
+      "d_m7eGE_Tas",
 
+      // New batch you sent (order preserved; duplicates removed automatically later)
+      "q9GH1ipM2uE","zQ3l2WIfe8g","ws0Jr62pYtU","qsKiMzpe1uU","JegwmCtJLg8","ovfrDhVkNio",
+      "h2ggtbe5AxU","O5pQCoOb_KA","rafM9wGttL4","fawjar7vExU","6SmreaQWKqs","Sn-jdfIPXVA",
+      "SMW-J2ASEBY","8k-L6Tf3aEE","gukU9K0ZmdU","OnKpf0UXZRo","Db3x8FVoG-A","Kw2X4ZIpCig",
+      "3c1x7GlfU3c","kWD-IA15fVs","sN7yZfKT1Tg","yqLTRIsd8eA","xGvw7ch_dKo","gXt9JMxA7aw",
+      "z2hp-xM7aeM","sS5K-Ob--z4","bT4XuDXxt5M","buSVmgbIJnw","ZxiiCSz0XJ8","WlOPQFbV_UA",
+      "L-DF_8HB9yo","WXheuUUOAHA","BHKbNjKYCcU","B5rb59x7E1A","oa3lsowlKjE","tZAluQTi9YM",
+      "1H-fZ8XONDw","Z09sv5LETjs","198n4ZXtgLc","VkaRHBTNKms","Uhj7i3DGbms","iQwvx_nTyMc"
+    ];
+
+    // remove duplicates while keeping order
+    const uniq = [];
+    const seen = new Set();
+    for (const id of ALL_VIDEO_IDS) {
+      if (!seen.has(id)) { seen.add(id); uniq.push(id); }
+    }
+
+    // Home shows only first 12 (fast + best conversion)
+    const HOME_COUNT = 12;
+    const HOME_IDS = uniq.slice(0, HOME_COUNT);
+    const START_HERE_ID = "nCKJjopUsfs";
+
+    const yearEl = document.getElementById("year");
+    yearEl.textContent = new Date().getFullYear();
+
+    function thumb(id){ return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
+    function ytWatch(id){ return `https://www.youtube.com/watch?v=${id}`; }
+    function embed(id){ return `https://www.youtube-nocookie.com/embed/${id}`; }
+
+    async function fetchTitle(id){
+      // oEmbed returns the real title; if it fails, we fall back to the ID
+      try{
+        const url = `https://www.youtube.com/oembed?url=${encodeURIComponent(ytWatch(id))}&format=json`;
+        const r = await fetch(url);
+        if(!r.ok) throw new Error("oEmbed failed");
+        const j = await r.json();
+        return j.title || id;
+      }catch(e){
+        return id;
+      }
+    }
+
+    function createCard(id, titleText){
+      const a = document.createElement("a");
+      a.className = "vcard";
+      a.href = "#";
+      a.dataset.id = id;
+      a.dataset.title = titleText.toLowerCase();
+
+      a.innerHTML = `
+        <img class="thumb" src="${thumb(id)}" alt="${titleText.replaceAll('"','')}" loading="lazy">
+        <div class="vmeta">
+          <div class="vtitle">${escapeHtml(titleText)}</div>
+          <p class="vsub">Click to play • Open on YouTube in player</p>
+        </div>
+      `;
+
+      a.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        openPlayer(id, titleText);
+      });
+
+      return a;
+    }
+
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function openPlayer(id, titleText){
+      // lightbox-like player inside the page (fast & professional)
+      const box = document.createElement("div");
+      box.style.position = "fixed";
+      box.style.inset = "0";
+      box.style.background = "rgba(0,0,0,.72)";
+      box.style.zIndex = "9999";
+      box.style.display = "grid";
+      box.style.placeItems = "center";
+      box.style.padding = "16px";
+
+      const modal = document.createElement("div");
+      modal.style.maxWidth = "980px";
+      modal.style.width = "100%";
+      modal.style.border = "1px solid rgba(255,255,255,.18)";
+      modal.style.borderRadius = "16px";
+      modal.style.overflow = "hidden";
+      modal.style.background = "#000";
+
+      modal.innerHTML = `
+        <div style="padding:12px 12px; background: rgba(0,0,0,.75); color:#fff; display:flex; gap:10px; align-items:center; justify-content:space-between;">
+          <div style="font-weight:800; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(titleText)}</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <a href="${ytWatch(id)}" target="_blank" rel="noopener" style="color:#fff; text-decoration:none; border:1px solid rgba(255,255,255,.22); padding:8px 10px; border-radius:12px; font-weight:800;">YouTube</a>
+            <button id="closeBtn" style="cursor:pointer; color:#111; background:linear-gradient(135deg,#ff2d2d,#ffb703); border:0; padding:8px 10px; border-radius:12px; font-weight:900;">Close</button>
+          </div>
+        </div>
+        <iframe src="${embed(id)}" title="${escapeHtml(titleText)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width:100%; aspect-ratio:16/9; border:0; display:block;"></iframe>
+      `;
+
+      box.appendChild(modal);
+      document.body.appendChild(box);
+
+      box.addEventListener("click", (e) => {
+        if (e.target === box) document.body.removeChild(box);
+      });
+      modal.querySelector("#closeBtn").addEventListener("click", () => {
+        document.body.removeChild(box);
+      });
+      document.addEventListener("keydown", function esc(ev){
+        if(ev.key === "Escape"){
+          if(document.body.contains(box)) document.body.removeChild(box);
+          document.removeEventListener("keydown", esc);
+        }
+      });
+    }
+
+    async function renderHome(){
+      // Start here player preview (single embed ok)
+      const startBox = document.getElementById("startHerePlayer");
+      startBox.innerHTML = `
+        <iframe loading="lazy" src="${embed(START_HERE_ID)}" title="Start here"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      `;
+
+      // Build cards with titles
+      const grid = document.getElementById("grid");
+      grid.innerHTML = "";
+
+      const titles = await Promise.all(HOME_IDS.map(fetchTitle));
+      HOME_IDS.forEach((id, i) => {
+        const t = titles[i];
+        grid.appendChild(createCard(id, t));
+      });
+
+      // search filter
+      const q = document.getElementById("q");
+      q.addEventListener("input", () => {
+        const term = q.value.trim().toLowerCase();
+        const cards = Array.from(grid.querySelectorAll(".vcard"));
+        cards.forEach(c => {
+          const ok = !term || c.dataset.title.includes(term) || c.dataset.id.includes(term);
+          c.style.display = ok ? "" : "none";
+        });
+      });
+    }
+
+    renderHome();
+  </script>
 </body>
 </html>
