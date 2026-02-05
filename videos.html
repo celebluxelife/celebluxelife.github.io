@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>All Videos — CELEB-LUXE-LIFE</title>
+  <meta name="description" content="Browse all CELEB-LUXE-LIFE videos. Fast gallery with search and click-to-play." />
+  <link rel="canonical" href="https://celebluxelife.github.io/videos.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+
+  <style>
+    :root{
+      --bg:#0b0f19; --card:rgba(255,255,255,.06); --border:rgba(255,255,255,.12);
+      --text:rgba(255,255,255,.92); --muted:rgba(255,255,255,.70);
+      --shadow:0 18px 55px rgba(0,0,0,.35); --radius:18px;
+      --max:1140px; --accent:#ff2d2d; --accent2:#ffb703;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      background:
+        radial-gradient(1200px 800px at 20% 0%, rgba(255,45,45,.18), transparent 60%),
+        radial-gradient(1200px 800px at 80% 10%, rgba(255,183,3,.10), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; flex-wrap:wrap;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      position:sticky; top:12px; z-index:10;
+      backdrop-filter: blur(10px);
+    }
+    .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+    .logo{width:34px;height:34px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+    .brand b{font-size:14px; letter-spacing:.2px}
+    .nav{display:flex; gap:10px; flex-wrap:wrap}
+    .nav a{ text-decoration:none; color:var(--muted); font-size:14px; padding:8px 12px; border-radius:999px; border:1px solid transparent; }
+    .nav a:hover{border-color:var(--border); background:rgba(255,255,255,.04); color:var(--text)}
+    .card{border:1px solid var(--border); background:rgba(255,255,255,.04); border-radius:var(--radius); box-shadow:var(--shadow); padding:18px; margin-top:16px}
+    .grid{display:grid; grid-template-columns: repeat(4, 1fr); gap:14px; margin-top:12px}
+    @media (max-width: 1100px){ .grid{grid-template-columns: repeat(3, 1fr)} }
+    @media (max-width: 860px){ .grid{grid-template-columns: repeat(2, 1fr)} }
+    @media (max-width: 620px){ .grid{grid-template-columns: 1fr} }
+    .vcard{border:1px solid var(--border); background:rgba(255,255,255,.03); border-radius:16px; overflow:hidden; text-decoration:none; display:block}
+    .thumb{width:100%; aspect-ratio:16/9; display:block; background:#000}
+    .vmeta{padding:12px}
+    .vtitle{margin:0 0 6px; font-size:13px; color:var(--text); font-weight:900}
+    .vsub{margin:0; font-size:12px; color:rgba(255,255,255,.62)}
+    input{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      outline:none;
+    }
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:12px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:11px 14px; border-radius:14px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      text-decoration:none; font-weight:900;
+      cursor:pointer;
+      color:var(--text);
+    }
+    .btn.primary{border-color:transparent; background:linear-gradient(135deg,var(--accent),var(--accent2)); color:#111}
+    .small{font-size:13px; color:rgba(255,255,255,.62)}
+    .footer{margin:18px 0 30px; text-align:center; color:rgba(255,255,255,.55); font-size:13px}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="Home">
+        <span class="logo" aria-hidden="true"></span>
+        <b>CELEB-LUXE-LIFE</b>
+      </a>
+      <nav class="nav" aria-label="Navigation">
+        <a href="index.html">Home</a>
+        <a href="videos.html">All videos</a>
+        <a href="https://www.youtube.com/@CELEB-LUXE-LIFE" target="_blank" rel="noopener">YouTube</a>
+      </nav>
+    </header>
+
+    <section class="card">
+      <h1 style="margin:0 0 8px; font-size:26px;">All Videos</h1>
+      <p class="small" style="margin-top:0">Fast gallery • Search • Click to play (player loads only when needed)</p>
+
+      <input id="q" type="text" placeholder="Search titles (e.g., Kardashians, net worth, mansion)..." />
+
+      <div class="btnrow">
+        <button class="btn primary" id="loadMore">Load more</button>
+        <a class="btn" href="https://www.youtube.com/@CELEB-LUXE-LIFE/videos" target="_blank" rel="noopener">Open on YouTube</a>
+      </div>
+
+      <div id="stats" class="small" style="margin-top:10px"></div>
+    </section>
+
+    <section class="card">
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <p class="footer">
+      © <span id="year"></span> CELEB-LUXE-LIFE
+    </p>
+  </div>
+
+  <script>
+    const ALL_VIDEO_IDS = [
+      "nCKJjopUsfs","rxt-F1CguhI","McfzGlemM_k","d_m7eGE_Tas",
+      "q9GH1ipM2uE","zQ3l2WIfe8g","ws0Jr62pYtU","qsKiMzpe1uU","JegwmCtJLg8","ovfrDhVkNio",
+      "h2ggtbe5AxU","O5pQCoOb_KA","rafM9wGttL4","fawjar7vExU","6SmreaQWKqs","Sn-jdfIPXVA",
+      "SMW-J2ASEBY","8k-L6Tf3aEE","gukU9K0ZmdU","OnKpf0UXZRo","Db3x8FVoG-A","Kw2X4ZIpCig",
+      "3c1x7GlfU3c","kWD-IA15fVs","sN7yZfKT1Tg","yqLTRIsd8eA","xGvw7ch_dKo","gXt9JMxA7aw",
+      "z2hp-xM7aeM","sS5K-Ob--z4","bT4XuDXxt5M","buSVmgbIJnw","ZxiiCSz0XJ8","WlOPQFbV_UA",
+      "L-DF_8HB9yo","WXheuUUOAHA","BHKbNjKYCcU","B5rb59x7E1A","oa3lsowlKjE","tZAluQTi9YM",
+      "1H-fZ8XONDw","Z09sv5LETjs","198n4ZXtgLc","VkaRHBTNKms","Uhj7i3DGbms","iQwvx_nTyMc"
+    ];
+
+    // unique (remove duplicate 1H-fZ8XONDw)
+    const uniq = [];
+    const seen = new Set();
+    for (const id of ALL_VIDEO_IDS) {
+      if (!seen.has(id)) { seen.add(id); uniq.push(id); }
+    }
+
+    const yearEl = document.getElementById("year");
+    yearEl.textContent = new Date().getFullYear();
+
+    function thumb(id){ return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`; }
+    function ytWatch(id){ return `https://www.youtube.com/watch?v=${id}`; }
+    function embed(id){ return `https://www.youtube-nocookie.com/embed/${id}`; }
+
+    async function fetchTitle(id){
+      try{
+        const url = `https://www.youtube.com/oembed?url=${encodeURIComponent(ytWatch(id))}&format=json`;
+        const r = await fetch(url);
+        if(!r.ok) throw new Error("oEmbed failed");
+        const j = await r.json();
+        return j.title || id;
+      }catch(e){
+        return id;
+      }
+    }
+
+    function escapeHtml(s){
+      return String(s)
+        .replaceAll("&","&amp;").replaceAll("<","&lt;")
+        .replaceAll(">","&gt;").replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+    }
+
+    function openPlayer(id, titleText){
+      const box = document.createElement("div");
+      box.style.position = "fixed";
+      box.style.inset = "0";
+      box.style.background = "rgba(0,0,0,.72)";
+      box.style.zIndex = "9999";
+      box.style.display = "grid";
+      box.style.placeItems = "center";
+      box.style.padding = "16px";
+
+      const modal = document.createElement("div");
+      modal.style.maxWidth = "980px";
+      modal.style.width = "100%";
+      modal.style.border = "1px solid rgba(255,255,255,.18)";
+      modal.style.borderRadius = "16px";
+      modal.style.overflow = "hidden";
+      modal.style.background = "#000";
+
+      modal.innerHTML = `
+        <div style="padding:12px 12px; background: rgba(0,0,0,.75); color:#fff; display:flex; gap:10px; align-items:center; justify-content:space-between;">
+          <div style="font-weight:900; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(titleText)}</div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <a href="${ytWatch(id)}" target="_blank" rel="noopener" style="color:#fff; text-decoration:none; border:1px solid rgba(255,255,255,.22); padding:8px 10px; border-radius:12px; font-weight:900;">YouTube</a>
+            <button id="closeBtn" style="cursor:pointer; color:#111; background:linear-gradient(135deg,#ff2d2d,#ffb703); border:0; padding:8px 10px; border-radius:12px; font-weight:900;">Close</button>
+          </div>
+        </div>
+        <iframe src="${embed(id)}" title="${escapeHtml(titleText)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="width:100%; aspect-ratio:16/9; border:0; display:block;"></iframe>
+      `;
+
+      box.appendChild(modal);
+      document.body.appendChild(box);
+
+      box.addEventListener("click", (e) => { if (e.target === box) document.body.removeChild(box); });
+      modal.querySelector("#closeBtn").addEventListener("click", () => document.body.removeChild(box));
+      document.addEventListener("keydown", function esc(ev){
+        if(ev.key === "Escape"){
+          if(document.body.contains(box)) document.body.removeChild(box);
+          document.removeEventListener("keydown", esc);
+        }
+      });
+    }
+
+    function makeCard(id, titleText){
+      const a = document.createElement("a");
+      a.className = "vcard";
+      a.href = "#";
+      a.dataset.id = id;
+      a.dataset.title = titleText.toLowerCase();
+
+      a.innerHTML = `
+        <img class="thumb" src="${thumb(id)}" alt="${titleText.replaceAll('"','')}" loading="lazy">
+        <div class="vmeta">
+          <div class="vtitle">${escapeHtml(titleText)}</div>
+          <p class="vsub">Click to play • ID: ${id}</p>
+        </div>
+      `;
+
+      a.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        openPlayer(id, titleText);
+      });
+
+      return a;
+    }
+
+    const grid = document.getElementById("grid");
+    const q = document.getElementById("q");
+    const stats = document.getElementById("stats");
+    const loadBtn = document.getElementById("loadMore");
+
+    let loaded = 0;
+    const CHUNK = 16; // loads in batches (fast)
+
+    let cache = []; // {id, title}
+
+    async function loadChunk(){
+      const next = uniq.slice(loaded, loaded + CHUNK);
+      if(next.length === 0) return;
+
+      const titles = await Promise.all(next.map(fetchTitle));
+      next.forEach((id, i) => cache.push({id, title: titles[i]}));
+      loaded += next.length;
+
+      render();
+      updateStats();
+    }
+
+    function render(){
+      const term = q.value.trim().toLowerCase();
+      grid.innerHTML = "";
+
+      const filtered = !term ? cache : cache.filter(v => v.title.toLowerCase().includes(term) || v.id.includes(term));
+
+      filtered.forEach(v => grid.appendChild(makeCard(v.id, v.title)));
+
+      if(term){
+        stats.textContent = `Showing ${filtered.length} / ${cache.length} loaded videos (search active).`;
+      }
+    }
+
+    function updateStats(){
+      stats.textContent = `Loaded ${cache.length} videos out of ${uniq.length}.`;
+      loadBtn.disabled = loaded >= uniq.length;
+      loadBtn.textContent = loaded >= uniq.length ? "All loaded" : "Load more";
+    }
+
+    q.addEventListener("input", render);
+    loadBtn.addEventListener("click", loadChunk);
+
+    // initial load
+    loadChunk();
+  </script>
+</body>
+</html>
